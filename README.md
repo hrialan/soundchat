@@ -1,4 +1,4 @@
-# 🎵 SoundChat - Your Musical Companion 🎵
+# 🕺 🎵 SoundChat - Your Musical Companion 🎵 🕺
 
 Welcome to **SoundChat**! Transform your emotions into music with this AI-based intelligent playlist generator. Whether you're feeling joyful, melancholic, or in need of motivation, SoundChat creates personalized playlists that match your mood. Let's dive into the world of music and emotions!
 
