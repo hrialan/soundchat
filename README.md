@@ -11,7 +11,7 @@ To use this application, you'll need to be added as a user on the Spotify Develo
 - **Spotify Integration**: Connect your Spotify account and enjoy your custom playlists directly.
 - **User-Friendly Interface**: Simple and intuitive design for a seamless experience.
 - **Support for Multiple Moods**: From dancing vibes to workout tunes, find the perfect playlist for every occasion.
-- **AI-Powered Recommendations**: Leverage OpenAI's GPT-3 to generate personalized playlist names.
+- **AI-Powered Recommendations**: Leverage OpenAI's GPT-4o to generate personalized playlist names.
 
 ## 🚀 Installation
 
