@@ -8,10 +8,10 @@ To use this application, you'll need to be added as a user on the Spotify Develo
 ## 🌟 Features
 
 - **Emotion-Based Playlists**: Generate playlists based on your current mood.
-- **Spotify Integration**: Connect your Spotify account and enjoy your custom playlists directly.
-- **User-Friendly Interface**: Simple and intuitive design for a seamless experience.
 - **Support for Multiple Moods**: From dancing vibes to workout tunes, find the perfect playlist for every occasion.
 - **AI-Powered Recommendations**: Leverage OpenAI's GPT-4o to generate personalized playlist names.
+- **Spotify Integration**: Connect your Spotify account and enjoy your custom playlists directly.
+- **User-Friendly Interface**: Simple and intuitive design for a seamless experience.
 
 ## 🚀 Installation
 
@@ -85,7 +85,7 @@ Follow these steps to get SoundChat up and running on your local machine:
 
 ## 📦 Deployment
 
-In the folder 'iac' you can find the Terraform scripts to deploy the application on Google Cloud Platform. The scripts create a Cloud Run service and a Firestore database.
+In the folder `iac` you can find the Terraform scripts to deploy the application on Google Cloud Platform. The scripts create a Cloud Run service and a Firestore database.
 
 ## 🤝 Contributing
 
