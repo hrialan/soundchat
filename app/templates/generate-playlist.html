@@ -1,0 +1,35 @@
+
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Bonjour, {{ user_name }} ! 🕺</h1>
+<p>
+    🎶  Laissez la musique parler pour vous !  🎶
+</p>
+<p><em>Exemples : "J'ai envie de danser !", "Besoin de détente", "Nostalgique", "Je vais faire du sport".</em></p>
+<form id="playlist-form" action="/generate-playlist" method="post">
+    <textarea rows="4" class="textbox" placeholder="Entrez votre humeur ici ..." name="user_context" required></textarea>
+
+    <div class="checkbox-container">
+        <input type="checkbox" id="modify_default_playlist" name="modify_default_playlist">
+        <label for="modify_default_playlist">Modifier la playlist "{{ app_data['app_name'] }}"</label>
+    </div>
+
+    <button type="submit" class="button">Générer la playlist</button>
+</form>
+
+<div id="loading" class="loading" style="display: none;">
+    <div class="spinner"></div>
+    <p>Génération de la playlist en cours...</p>
+</div>
+
+<p>
+    <a href="/signout" class="signout-button">Se déconnecter</a>
+</p>
+
+<script>
+    document.getElementById('playlist-form').addEventListener('submit', function() {
+        document.getElementById('loading').style.display = 'flex';
+    });
+</script>
+{% endblock %}

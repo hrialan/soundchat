@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{{ app_data['app_name'] }}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            position: relative;
+            overflow: auto;
+        }
+
+        .hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('/static/images/background3.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+            z-index: -2;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            animation: fadeIn 1s;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            max-width: 600px;
+            animation: fadeIn 1.5s;
+        }
+
+        form {
+            width: 70%;
+        }
+
+        .textbox {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 15px;
+            padding: 15px 10px; /* Padding amélioré pour le texte */
+            font-size: 1em;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s;
+        }
+
+        .textbox:focus {
+            outline: none;
+            border-color: #1DB954;
+        }
+
+        .textbox::placeholder {
+            color: #ffffff72;
+        }
+
+        .button {
+            background-color: #1DB954;
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            margin-top: 1em;
+            margin-bottom: 100px;
+            padding: 0.9em 1.8em;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeIn 2s;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #1ed760;
+            transform: scale(1.05);
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .signout-button {
+            background-color: transparent;
+            color: #ffffff;
+            padding: 5px 10px;
+            margin-top: 10em;
+            font-size: 0.7em;
+            border-radius: 15px;
+            border: 1px solid #ffffff;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            transform-origin: center;
+        }
+
+        .signout-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .cgu-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.8em;
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            transition: color 0.3s;
+        }
+
+        .cgu-link:hover {
+            color: #1ed760;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: #ffffff;
+            z-index: 1000;
+        }
+
+        .spinner {
+            border: 8px solid rgba(29, 185, 84, 0.2);
+            border-left-color: #1DB954;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        .giphy-embed {
+            margin-bottom: 10px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: nowrap;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #c4c5c5;
+            outline: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-container input[type="checkbox"]:before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: #121212;
+            border-radius: 50%;
+            transition: 0.3s ease-in-out;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked {
+            background: #1DB954;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked:before {
+            transform: translateX(20px);
+        }
+
+        .checkbox-container label {
+            margin-left: 10px;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 20px; /* Alignement vertical du label */
+        }
+
+        @media (max-width: 600px) {
+            /* Styles pour petit écran */
+            .checkbox-container {
+                flex-wrap: nowrap;
+            }
+
+            .checkbox-container label {
+                margin-left: 10px;
+                font-size: 0.9em;
+            }
+
+            .button {
+                font-size: 0.9rem;
+                padding: 0.7em 1.4em;
+            }
+
+            .checkbox-container input[type="checkbox"] {
+                width: 30px;
+                height: 15px;
+            }
+
+            .checkbox-container input[type="checkbox"]:before {
+                width: 12px;
+                height: 12px;
+            }
+
+            .checkbox-container input[type="checkbox"]:checked:before {
+                transform: translateX(15px);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero"></div>
+    <div class="overlay"></div>
+
+    {% block body %}
+    {% endblock %}
+
+    <a href="/cgu" class="cgu-link">CGU</a>
+
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="hrialan" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FFDD00" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

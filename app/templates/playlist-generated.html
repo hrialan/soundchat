@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Playlist générée avec succès !</h1>
+<p>
+    La nouvelle playlist <strong>{{ playlist_name }}</strong> a été générée sur votre compte Spotify. Retrouvez-la dès maintenant dans vos playlists privées.
+</p>
+{% if show_donation_link %}
+        <p>Vous avez généré plus de {{ max_number_of_playlists }} playlists avec SoundChat. Si vous aimez ce service, vous pouvez me soutenir en m'offrant un café ☕️</p>
+        <a href="https://www.buymeacoffee.com/hrialan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+{% endif %}
+<a href="/" class="button">Générer une nouvelle playlist</a>
+
+<a href="/signout" class="signout-button">Se déconnecter</a>
+{% endblock %}

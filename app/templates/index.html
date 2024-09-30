@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<h1>Bienvenue sur {{ app_data['app_name'] }} !</h1>
+<br>
+<p>
+    Transformez vos émotions en musique avec {{ app_data['app_name'] }} !
+    Votre compagnon musical intelligent qui crée des playlists sur mesure.
+</p>
+<p>
+    Connectez-vous à Spotify pour découvrir une playlist personnalisée qui s'adapte à vos goûts musicaux et à votre état d'esprit actuel. Que vous soyez joyeux, mélancolique ou en quête de motivation, {{ app_data['app_name'] }} s'adapte à vos émotions pour vous offrir une expérience musicale unique.
+</p>
+<div class="giphy-embed">
+    <iframe src="https://giphy.com/embed/blSTtZehjAZ8I" width="200"  style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+</div>
+<a href="{{ auth_url }}" class="button">Se connecter à Spotify</a>
+{% endblock %}

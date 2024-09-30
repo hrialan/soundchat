@@ -1,0 +1,20 @@
+steps:
+- id: 'Build Docker Image'
+  name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', '${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REGISTRY_REPOSITORY}/${_ARTIFACT_REGISTRY_IMAGE}:latest','.' ]
+- id: 'Push Docker Image'
+  name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', '${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REGISTRY_REPOSITORY}/${_ARTIFACT_REGISTRY_IMAGE}:latest' ]
+- id: 'Terraform apply'
+  name: 'hashicorp/terraform:latest'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+      cd iac/
+      TF_IN_AUTOMATION=1 terraform init -input=false -no-color -upgrade
+      TF_IN_AUTOMATION=1 terraform apply -auto-approve -input=false -no-color
+images:
+  - '${_LOCATION}-docker.pkg.dev/$PROJECT_ID/${_ARTIFACT_REGISTRY_REPOSITORY}/${_ARTIFACT_REGISTRY_IMAGE}:latest'
+options:
+  logging: CLOUD_LOGGING_ONLY
