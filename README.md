@@ -5,7 +5,9 @@ Welcome to **SoundChat**! Transform your emotions into music with this AI-based 
 A deployed version of SoundChat is available at [bit.ly/soundchatai](https://bit.ly/soundchatai).
 To use this application, you'll need to be added as a user on the Spotify Developer Dashboard. This is because I am currently using Spotify's development API, which has usage limits.
 
+
 ![SoundChat](app/static/images/app-homepage.png)
+
 
 ## 🌟 Features
 

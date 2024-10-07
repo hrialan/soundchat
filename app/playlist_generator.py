@@ -20,13 +20,13 @@ class PlaylistGenerator:
     def get_user_spotify_export(self):
         try:
             top_tracks_long_term = self.spotipy.current_user_top_tracks(
-                limit=25, time_range="long_term"
+                limit=30, time_range="long_term"
             )
-            liked_tracks = self.spotipy.current_user_saved_tracks(limit=15)
-            followed_artists = self.spotipy.current_user_followed_artists(limit=15)
-            recently_played = self.spotipy.current_user_recently_played(limit=15)
+            liked_tracks = self.spotipy.current_user_saved_tracks(limit=30)
+            followed_artists = self.spotipy.current_user_followed_artists(limit=30)
+            recently_played = self.spotipy.current_user_recently_played(limit=30)
             top_artists = self.spotipy.current_user_top_artists(
-                limit=25, time_range="long_term"
+                limit=30, time_range="long_term"
             )
         except spotipy.SpotifyException as e:
             print(f"Error fetching Spotify data: {e}")
