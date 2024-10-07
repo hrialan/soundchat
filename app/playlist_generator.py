@@ -2,7 +2,7 @@
 
 import json
 import os
-import time
+import prompts
 
 import spotipy
 from dotenv import load_dotenv
@@ -67,53 +67,9 @@ class PlaylistGenerator:
     def ask_playlist_generation(
         self, user_context, user_spotify_export, model_type="openai"
     ):
-        prompt = f"""
-        Hi there! Can you help me create a personalized playlist based on my mood and music preferences? Here are some details to guide you:
 
-        1. **Context**: I provided you the following context to help you understand my mood and preferences: "{user_context}". Use this context as much as possible, even more than my Spotify export if it's relevant.
-
-        2. **Spotify Export**: Here is my Spotify export, which gives insight into my musical tastes. Ensure that no track from this export appears in the final playlist (or at least not many):
-        --- BEGIN SPOTIFY EXPORT ---
-        {user_spotify_export}
-        --- END SPOTIFY EXPORT ---
-
-        3. **Current Date and Time**: {time.asctime()}, use this information to make the playlist relevant to the current mood and season.
-
-        4. **Country**: I'm from France, so you can consider French music or international music that is popular here.
-
-        **Instructions**:
-        - Create a playlist of 50 existing tracks that will surprise and delight me, introducing me to new music that aligns with my tastes.
-        - Follow the guidelines provided in the context to understand what kind of music I need right now.
-        - Each track should appear only once in the playlist.
-        - Determine from the context whether the playlist is intended for personal listening or for sharing with others. If it's for personal use, use as much of my Spotify export as possible to adapt to my tastes. If it's for a broader audience, use the context to craft a more universally appealing playlist.
-        - Provide a precise title and a one-line description for the playlist. Avoid using text decoration, quotes and markdown. Feel free to use emojis if they fit the context.
-        - Ensure the playlist title and description are in the same language as the context provided.
-
-        **Response Format**:
-        "
-        [SHORT PLAYLIST TITLE BASED ON THE CONTEXT]
-        $$$
-        [ONE-LINE PLAYLIST DESCRIPTION EXPLAINING THE SELECTION]
-        $$$
-        Artist,Track
-        Artist,Track
-        Artist,Track
-        ...  , ...
-        "
-
-        **Example**:
-        "
-        Chill Vibes for a Rainy Day
-        $$$
-        A soothing mix of tracks to relax and unwind on a rainy day.
-        $$$
-        Norah Jones,Don't Know Why
-        Bon Iver,Skinny Love
-        ...  , ...
-        "
-
-        Thanks for your help!
-        """
+        prompt = prompts.get_prompt(user_context, user_spotify_export, language="fr")
+        system_context = prompts.get_system_context(language="fr")
 
         if model_type == "openai":
             client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -122,7 +78,7 @@ class PlaylistGenerator:
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are a seasoned music connoisseur with an extensive knowledge of diverse genres and a keen ability to curate playlists that resonate deeply with listeners. Your mission is to craft an exceptional playlist that will captivate a broad audience, taking into account their current mood and detailed Spotify listening history. You are dedicated to understanding the nuances of each user's musical preferences, ensuring a personalized and emotionally engaging listening experience for everyone.",
+                        "content": system_context,
                     },
                     {"role": "user", "content": prompt},
                 ],
