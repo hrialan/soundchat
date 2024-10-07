@@ -2,7 +2,7 @@
 
 import json
 import os
-import prompts
+from .prompts import get_prompt, get_system_context
 
 import spotipy
 from dotenv import load_dotenv
@@ -68,8 +68,8 @@ class PlaylistGenerator:
         self, user_context, user_spotify_export, model_type="openai"
     ):
 
-        prompt = prompts.get_prompt(user_context, user_spotify_export, language="fr")
-        system_context = prompts.get_system_context(language="fr")
+        prompt = get_prompt(user_context, user_spotify_export, language="fr")
+        system_context = get_system_context(language="fr")
 
         if model_type == "openai":
             client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
