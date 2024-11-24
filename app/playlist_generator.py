@@ -77,7 +77,7 @@ class PlaylistGenerator:
                 model="o1-preview",
                 messages=[
                     {
-                        "role": "system",
+                        "role": "user",
                         "content": system_context,
                     },
                     {"role": "user", "content": prompt},
