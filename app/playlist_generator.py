@@ -74,7 +74,7 @@ class PlaylistGenerator:
         if model_type == "openai":
             client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
             completion = client.chat.completions.create(
-                model="gpt-4o",
+                model="o1-preview",
                 messages=[
                     {
                         "role": "system",
