@@ -209,7 +209,7 @@ def generate_playlist():
         except Exception as e:
             app.logger.error(f"Error generating playlist: {e}")
             flash("Error generating playlist.", "error")
-            return redirect("/")
+            return render_template("error.html", app_data=app_data)
 
         modify_default_playlist = request.form.get("modify_default_playlist") == "on"
 
